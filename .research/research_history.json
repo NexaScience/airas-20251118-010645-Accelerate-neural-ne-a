@@ -9,34 +9,167 @@
   ],
   "research_study_list": [
     {
-      "title": "Collage: Light-Weight Low-Precision Strategy for LLM Training"
+      "title": "Collage: Light-Weight Low-Precision Strategy for LLM Training",
+      "abstract": "Large models training is plagued by the intense compute cost and limited hardware memory. A practical solution is low-precision representation but is troubled by loss in numerical accuracy and unstable training rendering the model less useful. We argue that low-precision floating points can perform well provided the error is properly compensated at the critical locations in the training process. We propose Collage which utilizes multi-component float representation in low-precision to accurately perform operations with numerical errors accounted. To understand the impact of imprecision to training, we propose a simple and novel metric which tracks the lost information during training as well as differentiates various precision strategies. Our method works with commonly used low-precision such as half-precision ($16$-bit floating points) and can be naturally extended to work with even lower precision such as $8$-bit. Experimental results show that pre-training using Collage removes the requirement of using $32$-bit floating-point copies of the model and attains similar/better training performance compared to $(16, 32)$-bit mixed-precision strategy, with up to $3.7\\times$ speedup and $\\sim 15\\%$ to $23\\%$ less memory usage in practice.",
+      "meta_data": {
+        "arxiv_id": "2405.03637v1",
+        "authors": [
+          "Tao Yu",
+          "Gaurav Gupta",
+          "Karthick Gopalswamy",
+          "Amith Mamidala",
+          "Hao Zhou",
+          "Jeffrey Huynh",
+          "Youngsuk Park",
+          "Ron Diamant",
+          "Anoop Deoras",
+          "Luke Huan"
+        ],
+        "published_date": "2024-05-06T16:55:30Z",
+        "pdf_url": "https://arxiv.org/pdf/2405.03637v1.pdf"
+      }
     },
     {
-      "title": "Guaranteed Approximation Bounds for Mixed-Precision Neural Operators"
+      "title": "Guaranteed Approximation Bounds for Mixed-Precision Neural Operators",
+      "abstract": "Neural operators, such as Fourier Neural Operators (FNO), form a principled approach for learning solution operators for PDEs and other mappings between function spaces. However, many real-world problems require high-resolution training data, and the training time and limited GPU memory pose big barriers. One solution is to train neural operators in mixed precision to reduce the memory requirement and increase training speed. However, existing mixed-precision training techniques are designed for standard neural networks, and we find that their direct application to FNO leads to numerical overflow and poor memory efficiency. Further, at first glance, it may appear that mixed precision in FNO will lead to drastic accuracy degradation since reducing the precision of the Fourier transform yields poor results in classical numerical solvers. We show that this is not the case; in fact, we prove that reducing the precision in FNO still guarantees a good approximation bound, when done in a targeted manner. Specifically, we build on the intuition that neural operator learning inherently induces an approximation error, arising from discretizing the infinite-dimensional ground-truth input function, implying that training in full precision is not needed. We formalize this intuition by rigorously characterizing the approximation and precision errors of FNO and bounding these errors for general input functions. We prove that the precision error is asymptotically comparable to the approximation error. Based on this, we design a simple method to optimize the memory-intensive half-precision tensor contractions by greedily finding the optimal contraction order. Through extensive experiments on different state-of-the-art neural operators, datasets, and GPUs, we demonstrate that our approach reduces GPU memory usage by up to 50% and improves throughput by 58% with little or no reduction in accuracy.",
+      "meta_data": {
+        "arxiv_id": "2307.15034v3",
+        "authors": [
+          "Renbo Tu",
+          "Colin White",
+          "Jean Kossaifi",
+          "Boris Bonev",
+          "Nikola Kovachki",
+          "Gennady Pekhimenko",
+          "Kamyar Azizzadenesheli",
+          "Anima Anandkumar"
+        ],
+        "published_date": "2023-07-27T17:42:06Z",
+        "pdf_url": "https://arxiv.org/pdf/2307.15034v3.pdf"
+      }
     },
     {
-      "title": "Shifted and Squeezed 8-bit Floating Point format for Low-Precision Training of Deep Neural Networks"
+      "title": "Shifted and Squeezed 8-bit Floating Point format for Low-Precision Training of Deep Neural Networks",
+      "abstract": "Training with larger number of parameters while keeping fast iterations is an increasingly adopted strategy and trend for developing better performing Deep Neural Network (DNN) models. This necessitates increased memory footprint and computational requirements for training. Here we introduce a novel methodology for training deep neural networks using 8-bit floating point (FP8) numbers. Reduced bit precision allows for a larger effective memory and increased computational speed. We name this method Shifted and Squeezed FP8 (S2FP8). We show that, unlike previous 8-bit precision training methods, the proposed method works out-of-the-box for representative models: ResNet-50, Transformer and NCF. The method can maintain model accuracy without requiring fine-tuning loss scaling parameters or keeping certain layers in single precision. We introduce two learnable statistics of the DNN tensors - shifted and squeezed factors that are used to optimally adjust the range of the tensors in 8-bits, thus minimizing the loss in information due to quantization.",
+      "meta_data": {
+        "arxiv_id": "2001.05674v1",
+        "authors": [
+          "Léopold Cambier",
+          "Anahita Bhiwandiwalla",
+          "Ting Gong",
+          "Mehran Nekuii",
+          "Oguz H Elibol",
+          "Hanlin Tang"
+        ],
+        "published_date": "2020-01-16T06:38:27Z",
+        "pdf_url": "https://arxiv.org/pdf/2001.05674v1.pdf"
+      }
     },
     {
-      "title": "Structured Inverse-Free Natural Gradient Descent: Memory-Efficient & Numerically-Stable KFAC"
+      "title": "Structured Inverse-Free Natural Gradient Descent: Memory-Efficient & Numerically-Stable KFAC",
+      "abstract": "Second-order methods such as KFAC can be useful for neural net training. However, they are often memory-inefficient since their preconditioning Kronecker factors are dense, and numerically unstable in low precision as they require matrix inversion or decomposition. These limitations render such methods unpopular for modern mixed-precision training. We address them by (i) formulating an inverse-free KFAC update and (ii) imposing structures in the Kronecker factors, resulting in structured inverse-free natural gradient descent (SINGD). On modern neural networks, we show that SINGD is memory-efficient and numerically robust, in contrast to KFAC, and often outperforms AdamW even in half precision. Our work closes a gap between first- and second-order methods in modern low-precision training.",
+      "meta_data": {
+        "arxiv_id": "2312.05705v4",
+        "authors": [
+          "Wu Lin",
+          "Felix Dangel",
+          "Runa Eschenhagen",
+          "Kirill Neklyudov",
+          "Agustinus Kristiadi",
+          "Richard E. Turner",
+          "Alireza Makhzani"
+        ],
+        "published_date": "2023-12-09T23:13:32Z",
+        "pdf_url": "https://arxiv.org/pdf/2312.05705v4.pdf"
+      }
     },
     {
-      "title": "Multi-Precision Policy Enforced Training (MuPPET) : A Precision-Switching Strategy for Quantised Fixed-Point Training of CNNs"
+      "title": "Multi-Precision Policy Enforced Training (MuPPET) : A Precision-Switching Strategy for Quantised Fixed-Point Training of CNNs",
+      "abstract": "Large-scale convolutional neural networks (CNNs) suffer from very long training times, spanning from hours to weeks, limiting the productivity and experimentation of deep learning practitioners. As networks grow in size and complexity, training time can be reduced through low-precision data representations and computations. However, in doing so the final accuracy suffers due to the problem of vanishing gradients. Existing state-of-the-art methods combat this issue by means of a mixed-precision approach utilising two different precision levels, FP32 (32-bit floating-point) and FP16/FP8 (16-/8-bit floating-point), leveraging the hardware support of recent GPU architectures for FP16 operations to obtain performance gains. This work pushes the boundary of quantised training by employing a multilevel optimisation approach that utilises multiple precisions including low-precision fixed-point representations. The novel training strategy, MuPPET, combines the use of multiple number representation regimes together with a precision-switching mechanism that decides at run time the transition point between precision regimes. Overall, the proposed strategy tailors the training process to the hardware-level capabilities of the target hardware architecture and yields improvements in training time and energy efficiency compared to state-of-the-art approaches. Applying MuPPET on the training of AlexNet, ResNet18 and GoogLeNet on ImageNet (ILSVRC12) and targeting an NVIDIA Turing GPU, MuPPET achieves the same accuracy as standard full-precision training with training-time speedup of up to 1.84$\\times$ and an average speedup of 1.58$\\times$ across the networks.",
+      "meta_data": {
+        "arxiv_id": "2006.09049v1",
+        "authors": [
+          "Aditya Rajagopal",
+          "Diederik Adriaan Vink",
+          "Stylianos I. Venieris",
+          "Christos-Savvas Bouganis"
+        ],
+        "published_date": "2020-06-16T10:14:36Z",
+        "pdf_url": "https://arxiv.org/pdf/2006.09049v1.pdf"
+      }
     },
     {
-      "title": "Towards Cheaper Inference in Deep Networks with Lower Bit-Width Accumulators"
+      "title": "Towards Cheaper Inference in Deep Networks with Lower Bit-Width Accumulators",
+      "abstract": "The majority of the research on the quantization of Deep Neural Networks (DNNs) is focused on reducing the precision of tensors visible by high-level frameworks (e.g., weights, activations, and gradients). However, current hardware still relies on high-accuracy core operations. Most significant is the operation of accumulating products. This high-precision accumulation operation is gradually becoming the main computational bottleneck. This is because, so far, the usage of low-precision accumulators led to a significant degradation in performance. In this work, we present a simple method to train and fine-tune high-end DNNs, to allow, for the first time, utilization of cheaper, $12$-bits accumulators, with no significant degradation in accuracy. Lastly, we show that as we decrease the accumulation precision further, using fine-grained gradient approximations can improve the DNN accuracy.",
+      "meta_data": {
+        "arxiv_id": "2401.14110v1",
+        "authors": [
+          "Yaniv Blumenfeld",
+          "Itay Hubara",
+          "Daniel Soudry"
+        ],
+        "published_date": "2024-01-25T11:46:01Z",
+        "pdf_url": "https://arxiv.org/pdf/2401.14110v1.pdf"
+      }
     },
     {
-      "title": "Accumulated Decoupled Learning with Gradient Staleness Mitigation for Convolutional Neural Networks"
+      "title": "Accumulated Decoupled Learning with Gradient Staleness Mitigation for Convolutional Neural Networks",
+      "abstract": "Decoupled learning is a branch of model parallelism which parallelizes the training of a network by splitting it depth-wise into multiple modules. Techniques from decoupled learning usually lead to stale gradient effect because of their asynchronous implementation, thereby causing performance degradation. In this paper, we propose an accumulated decoupled learning (ADL) which incorporates the gradient accumulation technique to mitigate the stale gradient effect. We give both theoretical and empirical evidences regarding how the gradient staleness can be reduced. We prove that the proposed method can converge to critical points, i.e., the gradients converge to 0, in spite of its asynchronous nature. Empirical validation is provided by training deep convolutional neural networks to perform classification tasks on CIFAR-10 and ImageNet datasets. The ADL is shown to outperform several state-of-the-arts in the classification tasks, and is the fastest among the compared methods.",
+      "meta_data": {
+        "arxiv_id": "2012.03747v1",
+        "authors": [
+          "Huiping Zhuang",
+          "Zhiping Lin",
+          "Kar-Ann Toh"
+        ],
+        "published_date": "2020-12-03T11:52:55Z",
+        "pdf_url": "https://arxiv.org/pdf/2012.03747v1.pdf"
+      }
     },
     {
-      "title": "Neural gradients are near-lognormal: improved quantized  and sparse training"
+      "title": "Neural gradients are near-lognormal: improved quantized  and sparse training",
+      "abstract": "While training can mostly be accelerated by reducing the time needed to propagate neural gradients back throughout the model, most previous works focus on the quantization/pruning of weights and activations. These methods are often not applicable to neural gradients, which have very different statistical properties. Distinguished from weights and activations, we find that the distribution of neural gradients is approximately lognormal. Considering this, we suggest two closed-form analytical methods to reduce the computational and memory burdens of neural gradients. The first method optimizes the floating-point format and scale of the gradients. The second method accurately sets sparsity thresholds for gradient pruning. Each method achieves state-of-the-art results on ImageNet. To the best of our knowledge, this paper is the first to (1) quantize the gradients to 6-bit floating-point formats, or (2) achieve up to 85% gradient sparsity -- in each case without accuracy degradation. Reference implementation accompanies the paper.",
+      "meta_data": {
+        "arxiv_id": "2006.08173v3",
+        "authors": [
+          "Brian Chmiel",
+          "Liad Ben-Uri",
+          "Moran Shkolnik",
+          "Elad Hoffer",
+          "Ron Banner",
+          "Daniel Soudry"
+        ],
+        "published_date": "2020-06-15T07:00:15Z",
+        "pdf_url": "https://arxiv.org/pdf/2006.08173v3.pdf"
+      }
     },
     {
-      "title": "Stabilizing Backpropagation Through Time to Learn Complex Physics"
+      "title": "Stabilizing Backpropagation Through Time to Learn Complex Physics",
+      "abstract": "Of all the vector fields surrounding the minima of recurrent learning setups, the gradient field with its exploding and vanishing updates appears a poor choice for optimization, offering little beyond efficient computability. We seek to improve this suboptimal practice in the context of physics simulations, where backpropagating feedback through many unrolled time steps is considered crucial to acquiring temporally coherent behavior. The alternative vector field we propose follows from two principles: physics simulators, unlike neural networks, have a balanced gradient flow, and certain modifications to the backpropagation pass leave the positions of the original minima unchanged. As any modification of backpropagation decouples forward and backward pass, the rotation-free character of the gradient field is lost. Therefore, we discuss the negative implications of using such a rotational vector field for optimization and how to counteract them. Our final procedure is easily implementable via a sequence of gradient stopping and component-wise comparison operations, which do not negatively affect scalability. Our experiments on three control problems show that especially as we increase the complexity of each task, the unbalanced updates from the gradient can no longer provide the precise control signals necessary while our method still solves the tasks. Our code can be found at https://github.com/tum-pbs/StableBPTT.",
+      "meta_data": {
+        "arxiv_id": "2405.02041v1",
+        "authors": [
+          "Patrick Schnell",
+          "Nils Thuerey"
+        ],
+        "published_date": "2024-05-03T12:20:08Z",
+        "pdf_url": "https://arxiv.org/pdf/2405.02041v1.pdf"
+      }
     },
     {
-      "title": "Extrapolation for Large-batch Training in Deep Learning"
+      "title": "Extrapolation for Large-batch Training in Deep Learning",
+      "abstract": "Deep learning networks are typically trained by Stochastic Gradient Descent (SGD) methods that iteratively improve the model parameters by estimating a gradient on a very small fraction of the training data. A major roadblock faced when increasing the batch size to a substantial fraction of the training data for improving training time is the persistent degradation in performance (generalization gap). To address this issue, recent work propose to add small perturbations to the model parameters when computing the stochastic gradients and report improved generalization performance due to smoothing effects. However, this approach is poorly understood; it requires often model-specific noise and fine-tuning. To alleviate these drawbacks, we propose to use instead computationally efficient extrapolation (extragradient) to stabilize the optimization trajectory while still benefiting from smoothing to avoid sharp minima. This principled approach is well grounded from an optimization perspective and we show that a host of variations can be covered in a unified framework that we propose. We prove the convergence of this novel scheme and rigorously evaluate its empirical performance on ResNet, LSTM, and Transformer. We demonstrate that in a variety of experiments the scheme allows scaling to much larger batch sizes than before whilst reaching or surpassing SOTA accuracy.",
+      "meta_data": {
+        "arxiv_id": "2006.05720v1",
+        "authors": [
+          "Tao Lin",
+          "Lingjing Kong",
+          "Sebastian U. Stich",
+          "Martin Jaggi"
+        ],
+        "published_date": "2020-06-10T08:22:41Z",
+        "pdf_url": "https://arxiv.org/pdf/2006.05720v1.pdf"
+      }
     },
     {
       "title": "DRAGONN: Distributed Randomized Approximate Gradients of Neural Networks"
@@ -45,43 +178,197 @@
       "title": "DRAGONN: Distributed Randomized Approximate Gradients of Neural Networks"
     },
     {
-      "title": "DD-PPO: Learning Near-Perfect PointGoal Navigators from 2.5 Billion Frames"
+      "title": "DD-PPO: Learning Near-Perfect PointGoal Navigators from 2.5 Billion Frames",
+      "abstract": "We present Decentralized Distributed Proximal Policy Optimization (DD-PPO), a method for distributed reinforcement learning in resource-intensive simulated environments. DD-PPO is distributed (uses multiple machines), decentralized (lacks a centralized server), and synchronous (no computation is ever stale), making it conceptually simple and easy to implement. In our experiments on training virtual robots to navigate in Habitat-Sim, DD-PPO exhibits near-linear scaling -- achieving a speedup of 107x on 128 GPUs over a serial implementation. We leverage this scaling to train an agent for 2.5 Billion steps of experience (the equivalent of 80 years of human experience) -- over 6 months of GPU-time training in under 3 days of wall-clock time with 64 GPUs.\n  This massive-scale training not only sets the state of art on Habitat Autonomous Navigation Challenge 2019, but essentially solves the task --near-perfect autonomous navigation in an unseen environment without access to a map, directly from an RGB-D camera and a GPS+Compass sensor. Fortuitously, error vs computation exhibits a power-law-like distribution; thus, 90% of peak performance is obtained relatively early (at 100 million steps) and relatively cheaply (under 1 day with 8 GPUs). Finally, we show that the scene understanding and navigation policies learned can be transferred to other navigation tasks -- the analog of ImageNet pre-training + task-specific fine-tuning for embodied AI. Our model outperforms ImageNet pre-trained CNNs on these transfer tasks and can serve as a universal resource (all models and code are publicly available).",
+      "meta_data": {
+        "arxiv_id": "1911.00357v2",
+        "authors": [
+          "Erik Wijmans",
+          "Abhishek Kadian",
+          "Ari Morcos",
+          "Stefan Lee",
+          "Irfan Essa",
+          "Devi Parikh",
+          "Manolis Savva",
+          "Dhruv Batra"
+        ],
+        "published_date": "2019-11-01T13:07:37Z",
+        "pdf_url": "https://arxiv.org/pdf/1911.00357v2.pdf"
+      }
     },
     {
-      "title": "Towards a Better Theoretical Understanding of Independent Subnetwork Training"
+      "title": "Towards a Better Theoretical Understanding of Independent Subnetwork Training",
+      "abstract": "Modern advancements in large-scale machine learning would be impossible without the paradigm of data-parallel distributed computing. Since distributed computing with large-scale models imparts excessive pressure on communication channels, significant recent research has been directed toward co-designing communication compression strategies and training algorithms with the goal of reducing communication costs. While pure data parallelism allows better data scaling, it suffers from poor model scaling properties. Indeed, compute nodes are severely limited by memory constraints, preventing further increases in model size. For this reason, the latest achievements in training giant neural network models also rely on some form of model parallelism. In this work, we take a closer theoretical look at Independent Subnetwork Training (IST), which is a recently proposed and highly effective technique for solving the aforementioned problems. We identify fundamental differences between IST and alternative approaches, such as distributed methods with compressed communication, and provide a precise analysis of its optimization performance on a quadratic model.",
+      "meta_data": {
+        "arxiv_id": "2306.16484v2",
+        "authors": [
+          "Egor Shulgin",
+          "Peter Richtárik"
+        ],
+        "published_date": "2023-06-28T18:14:22Z",
+        "pdf_url": "https://arxiv.org/pdf/2306.16484v2.pdf"
+      }
     },
     {
-      "title": "Debiasing Distributed Second Order Optimization with Surrogate Sketching and Scaled Regularization"
+      "title": "Debiasing Distributed Second Order Optimization with Surrogate Sketching and Scaled Regularization",
+      "abstract": "In distributed second order optimization, a standard strategy is to average many local estimates, each of which is based on a small sketch or batch of the data. However, the local estimates on each machine are typically biased, relative to the full solution on all of the data, and this can limit the effectiveness of averaging. Here, we introduce a new technique for debiasing the local estimates, which leads to both theoretical and empirical improvements in the convergence rate of distributed second order methods. Our technique has two novel components: (1) modifying standard sketching techniques to obtain what we call a surrogate sketch; and (2) carefully scaling the global regularization parameter for local computations. Our surrogate sketches are based on determinantal point processes, a family of distributions for which the bias of an estimate of the inverse Hessian can be computed exactly. Based on this computation, we show that when the objective being minimized is $l_2$-regularized with parameter $λ$ and individual machines are each given a sketch of size $m$, then to eliminate the bias, local estimates should be computed using a shrunk regularization parameter given by $λ^{\\prime}=λ\\cdot(1-\\frac{d_λ}{m})$, where $d_λ$ is the $λ$-effective dimension of the Hessian (or, for quadratic problems, the data matrix).",
+      "meta_data": {
+        "arxiv_id": "2007.01327v1",
+        "authors": [
+          "Michał Dereziński",
+          "Burak Bartan",
+          "Mert Pilanci",
+          "Michael W. Mahoney"
+        ],
+        "published_date": "2020-07-02T18:08:14Z",
+        "pdf_url": "https://arxiv.org/pdf/2007.01327v1.pdf"
+      }
     },
     {
-      "title": "AutoLRS: Automatic Learning-Rate Schedule by Bayesian Optimization on the Fly"
+      "title": "AutoLRS: Automatic Learning-Rate Schedule by Bayesian Optimization on the Fly",
+      "abstract": "The learning rate (LR) schedule is one of the most important hyper-parameters needing careful tuning in training DNNs. However, it is also one of the least automated parts of machine learning systems and usually costs significant manual effort and computing. Though there are pre-defined LR schedules and optimizers with adaptive LR, they introduce new hyperparameters that need to be tuned separately for different tasks/datasets. In this paper, we consider the question: Can we automatically tune the LR over the course of training without human involvement? We propose an efficient method, AutoLRS, which automatically optimizes the LR for each training stage by modeling training dynamics. AutoLRS aims to find an LR applied to every $τ$ steps that minimizes the resulted validation loss. We solve this black-box optimization on the fly by Bayesian optimization (BO). However, collecting training instances for BO requires a system to evaluate each LR queried by BO's acquisition function for $τ$ steps, which is prohibitively expensive in practice. Instead, we apply each candidate LR for only $τ'\\llτ$ steps and train an exponential model to predict the validation loss after $τ$ steps. This mutual-training process between BO and the loss-prediction model allows us to limit the training steps invested in the BO search. We demonstrate the advantages and the generality of AutoLRS through extensive experiments of training DNNs for tasks from diverse domains using different optimizers. The LR schedules auto-generated by AutoLRS lead to a speedup of $1.22\\times$, $1.43\\times$, and $1.5\\times$ when training ResNet-50, Transformer, and BERT, respectively, compared to the LR schedules in their original papers, and an average speedup of $1.31\\times$ over state-of-the-art heavily-tuned LR schedules.",
+      "meta_data": {
+        "arxiv_id": "2105.10762v1",
+        "authors": [
+          "Yuchen Jin",
+          "Tianyi Zhou",
+          "Liangyu Zhao",
+          "Yibo Zhu",
+          "Chuanxiong Guo",
+          "Marco Canini",
+          "Arvind Krishnamurthy"
+        ],
+        "published_date": "2021-05-22T16:41:10Z",
+        "pdf_url": "https://arxiv.org/pdf/2105.10762v1.pdf"
+      }
     },
     {
-      "title": "Budgeted Training: Rethinking Deep Neural Network Training Under Resource Constraints"
+      "title": "Budgeted Training: Rethinking Deep Neural Network Training Under Resource Constraints",
+      "abstract": "In most practical settings and theoretical analyses, one assumes that a model can be trained until convergence. However, the growing complexity of machine learning datasets and models may violate such assumptions. Indeed, current approaches for hyper-parameter tuning and neural architecture search tend to be limited by practical resource constraints. Therefore, we introduce a formal setting for studying training under the non-asymptotic, resource-constrained regime, i.e., budgeted training. We analyze the following problem: \"given a dataset, algorithm, and fixed resource budget, what is the best achievable performance?\" We focus on the number of optimization iterations as the representative resource. Under such a setting, we show that it is critical to adjust the learning rate schedule according to the given budget. Among budget-aware learning schedules, we find simple linear decay to be both robust and high-performing. We support our claim through extensive experiments with state-of-the-art models on ImageNet (image classification), Kinetics (video classification), MS COCO (object detection and instance segmentation), and Cityscapes (semantic segmentation). We also analyze our results and find that the key to a good schedule is budgeted convergence, a phenomenon whereby the gradient vanishes at the end of each allowed budget. We also revisit existing approaches for fast convergence and show that budget-aware learning schedules readily outperform such approaches under (the practical but under-explored) budgeted training setting.",
+      "meta_data": {
+        "arxiv_id": "1905.04753v4",
+        "authors": [
+          "Mengtian Li",
+          "Ersin Yumer",
+          "Deva Ramanan"
+        ],
+        "published_date": "2019-05-12T17:49:49Z",
+        "pdf_url": "https://arxiv.org/pdf/1905.04753v4.pdf"
+      }
     },
     {
-      "title": "Learning Rate Schedules in the Presence of Distribution Shift"
+      "title": "Learning Rate Schedules in the Presence of Distribution Shift",
+      "abstract": "We design learning rate schedules that minimize regret for SGD-based online learning in the presence of a changing data distribution. We fully characterize the optimal learning rate schedule for online linear regression via a novel analysis with stochastic differential equations. For general convex loss functions, we propose new learning rate schedules that are robust to distribution shift and we give upper and lower bounds for the regret that only differ by constants. For non-convex loss functions, we define a notion of regret based on the gradient norm of the estimated models and propose a learning schedule that minimizes an upper bound on the total expected regret. Intuitively, one expects changing loss landscapes to require more exploration, and we confirm that optimal learning rate schedules typically increase in the presence of distribution shift. Finally, we provide experiments for high-dimensional regression models and neural networks to illustrate these learning rate schedules and their cumulative regret.",
+      "meta_data": {
+        "arxiv_id": "2303.15634v2",
+        "authors": [
+          "Matthew Fahrbach",
+          "Adel Javanmard",
+          "Vahab Mirrokni",
+          "Pratik Worah"
+        ],
+        "published_date": "2023-03-27T23:29:02Z",
+        "venue": "Proceedings of the 40th International Conference on Machine Learning (ICML 2023) 9523-9546",
+        "pdf_url": "https://arxiv.org/pdf/2303.15634v2.pdf"
+      }
     },
     {
-      "title": "Scaling Laws and Compute-Optimal Training Beyond Fixed Training Durations"
+      "title": "Scaling Laws and Compute-Optimal Training Beyond Fixed Training Durations",
+      "abstract": "Scale has become a main ingredient in obtaining strong machine learning models. As a result, understanding a model's scaling properties is key to effectively designing both the right training setup as well as future generations of architectures. In this work, we argue that scale and training research has been needlessly complex due to reliance on the cosine schedule, which prevents training across different lengths for the same model size. We investigate the training behavior of a direct alternative -- constant learning rate and cooldowns -- and find that it scales predictably and reliably similar to cosine. Additionally, we show that stochastic weight averaging yields improved performance along the training trajectory, without additional training costs, across different scales. Importantly, with these findings we demonstrate that scaling experiments can be performed with significantly reduced compute and GPU hours by utilizing fewer but reusable training runs. Our code is available at \\url{https://github.com/epfml/schedules-and-scaling/}.",
+      "meta_data": {
+        "arxiv_id": "2405.18392v3",
+        "authors": [
+          "Alexander Hägele",
+          "Elie Bakouch",
+          "Atli Kosson",
+          "Loubna Ben Allal",
+          "Leandro Von Werra",
+          "Martin Jaggi"
+        ],
+        "published_date": "2024-05-28T17:33:54Z",
+        "pdf_url": "https://arxiv.org/pdf/2405.18392v3.pdf"
+      }
     },
     {
-      "title": "Stepping on the Edge: Curvature Aware Learning Rate Tuners"
+      "title": "Stepping on the Edge: Curvature Aware Learning Rate Tuners",
+      "abstract": "Curvature information -- particularly, the largest eigenvalue of the loss Hessian, known as the sharpness -- often forms the basis for learning rate tuners. However, recent work has shown that the curvature information undergoes complex dynamics during training, going from a phase of increasing sharpness to eventual stabilization. We analyze the closed-loop feedback effect between learning rate tuning and curvature. We find that classical learning rate tuners may yield greater one-step loss reduction, yet they ultimately underperform in the long term when compared to constant learning rates in the full batch regime. These models break the stabilization of the sharpness, which we explain using a simplified model of the joint dynamics of the learning rate and the curvature. To further investigate these effects, we introduce a new learning rate tuning method, Curvature Dynamics Aware Tuning (CDAT), which prioritizes long term curvature stabilization over instantaneous progress on the objective. In the full batch regime, CDAT shows behavior akin to prefixed warm-up schedules on deep learning objectives, outperforming tuned constant learning rates. In the mini batch regime, we observe that stochasticity introduces confounding effects that explain the previous success of some learning rate tuners at appropriate batch sizes. Our findings highlight the critical role of understanding the joint dynamics of the learning rate and curvature, beyond greedy minimization, to diagnose failures and design effective adaptive learning rate tuners.",
+      "meta_data": {
+        "arxiv_id": "2407.06183v1",
+        "authors": [
+          "Vincent Roulet",
+          "Atish Agarwala",
+          "Jean-Bastien Grill",
+          "Grzegorz Swirszcz",
+          "Mathieu Blondel",
+          "Fabian Pedregosa"
+        ],
+        "published_date": "2024-07-08T17:56:00Z",
+        "pdf_url": "https://arxiv.org/pdf/2407.06183v1.pdf"
+      }
     },
     {
-      "title": "Fantastic Weights and How to Find Them: Where to Prune in Dynamic Sparse Training"
+      "title": "Fantastic Weights and How to Find Them: Where to Prune in Dynamic Sparse Training",
+      "abstract": "Dynamic Sparse Training (DST) is a rapidly evolving area of research that seeks to optimize the sparse initialization of a neural network by adapting its topology during training. It has been shown that under specific conditions, DST is able to outperform dense models. The key components of this framework are the pruning and growing criteria, which are repeatedly applied during the training process to adjust the network's sparse connectivity. While the growing criterion's impact on DST performance is relatively well studied, the influence of the pruning criterion remains overlooked. To address this issue, we design and perform an extensive empirical analysis of various pruning criteria to better understand their impact on the dynamics of DST solutions. Surprisingly, we find that most of the studied methods yield similar results. The differences become more significant in the low-density regime, where the best performance is predominantly given by the simplest technique: magnitude-based pruning. The code is provided at https://github.com/alooow/fantastic_weights_paper",
+      "meta_data": {
+        "arxiv_id": "2306.12230v2",
+        "authors": [
+          "Aleksandra I. Nowak",
+          "Bram Grooten",
+          "Decebal Constantin Mocanu",
+          "Jacek Tabor"
+        ],
+        "published_date": "2023-06-21T12:43:55Z",
+        "pdf_url": "https://arxiv.org/pdf/2306.12230v2.pdf"
+      }
     },
     {
       "title": "Neuron-level Structured Pruning using Polarization Regularizer"
     },
     {
-      "title": "The Combinatorial Brain Surgeon: Pruning Weights That Cancel One Another in Neural Networks"
+      "title": "The Combinatorial Brain Surgeon: Pruning Weights That Cancel One Another in Neural Networks",
+      "abstract": "Neural networks tend to achieve better accuracy with training if they are larger -- even if the resulting models are overparameterized. Nevertheless, carefully removing such excess parameters before, during, or after training may also produce models with similar or even improved accuracy. In many cases, that can be curiously achieved by heuristics as simple as removing a percentage of the weights with the smallest absolute value -- even though magnitude is not a perfect proxy for weight relevance. With the premise that obtaining significantly better performance from pruning depends on accounting for the combined effect of removing multiple weights, we revisit one of the classic approaches for impact-based pruning: the Optimal Brain Surgeon(OBS). We propose a tractable heuristic for solving the combinatorial extension of OBS, in which we select weights for simultaneous removal, as well as a systematic update of the remaining weights. Our selection method outperforms other methods under high sparsity, and the weight update is advantageous even when combined with the other methods.",
+      "meta_data": {
+        "arxiv_id": "2203.04466v3",
+        "authors": [
+          "Xin Yu",
+          "Thiago Serra",
+          "Srikumar Ramalingam",
+          "Shandian Zhe"
+        ],
+        "published_date": "2022-03-09T00:58:04Z",
+        "pdf_url": "https://arxiv.org/pdf/2203.04466v3.pdf"
+      }
     },
     {
-      "title": "The Combinatorial Brain Surgeon: Pruning Weights That Cancel One Another in Neural Networks"
+      "title": "The Combinatorial Brain Surgeon: Pruning Weights That Cancel One Another in Neural Networks",
+      "abstract": "Neural networks tend to achieve better accuracy with training if they are larger -- even if the resulting models are overparameterized. Nevertheless, carefully removing such excess parameters before, during, or after training may also produce models with similar or even improved accuracy. In many cases, that can be curiously achieved by heuristics as simple as removing a percentage of the weights with the smallest absolute value -- even though magnitude is not a perfect proxy for weight relevance. With the premise that obtaining significantly better performance from pruning depends on accounting for the combined effect of removing multiple weights, we revisit one of the classic approaches for impact-based pruning: the Optimal Brain Surgeon(OBS). We propose a tractable heuristic for solving the combinatorial extension of OBS, in which we select weights for simultaneous removal, as well as a systematic update of the remaining weights. Our selection method outperforms other methods under high sparsity, and the weight update is advantageous even when combined with the other methods.",
+      "meta_data": {
+        "arxiv_id": "2203.04466v3",
+        "authors": [
+          "Xin Yu",
+          "Thiago Serra",
+          "Srikumar Ramalingam",
+          "Shandian Zhe"
+        ],
+        "published_date": "2022-03-09T00:58:04Z",
+        "pdf_url": "https://arxiv.org/pdf/2203.04466v3.pdf"
+      }
     },
     {
-      "title": "Dynamic Sparse Training: Find Efficient Sparse Network From Scratch With Trainable Masked Layers"
+      "title": "Dynamic Sparse Training: Find Efficient Sparse Network From Scratch With Trainable Masked Layers",
+      "abstract": "We present a novel network pruning algorithm called Dynamic Sparse Training that can jointly find the optimal network parameters and sparse network structure in a unified optimization process with trainable pruning thresholds. These thresholds can have fine-grained layer-wise adjustments dynamically via backpropagation. We demonstrate that our dynamic sparse training algorithm can easily train very sparse neural network models with little performance loss using the same number of training epochs as dense models. Dynamic Sparse Training achieves the state of the art performance compared with other sparse training algorithms on various network architectures. Additionally, we have several surprising observations that provide strong evidence for the effectiveness and efficiency of our algorithm. These observations reveal the underlying problems of traditional three-stage pruning algorithms and present the potential guidance provided by our algorithm to the design of more compact network architectures.",
+      "meta_data": {
+        "arxiv_id": "2005.06870v1",
+        "authors": [
+          "Junjie Liu",
+          "Zhe Xu",
+          "Runbin Shi",
+          "Ray C. C. Cheung",
+          "Hayden K. H. So"
+        ],
+        "published_date": "2020-05-14T11:05:21Z",
+        "pdf_url": "https://arxiv.org/pdf/2005.06870v1.pdf"
+      }
     }
   ]
 }
