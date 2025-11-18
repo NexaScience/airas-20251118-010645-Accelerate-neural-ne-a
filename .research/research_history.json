@@ -1,0 +1,10 @@
+{
+  "research_topic": "Accelerate neural network training",
+  "queries": [
+    "mixed precision training",
+    "gradient accumulation",
+    "distributed data parallel",
+    "learning rate scheduling",
+    "neural network pruning"
+  ]
+}
