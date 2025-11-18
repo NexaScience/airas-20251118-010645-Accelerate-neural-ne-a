@@ -488,7 +488,49 @@
     "iterations": [
       {
         "iteration_id": 1,
-        "method": "Carbon-Aware Forward-Looking Adaptive Controller (C-FLAC)\n1. Retain E-FLAC’s quadratic surrogate to predict loss improvement I(η)=α_t η‖g_t‖²/2.\n2. Carbon-intensity feed-forward.  Query an external signal c_t  (gCO₂ kWh⁻¹)—either live via the free ElectricityMap / WattTime API or replayed from a trace—for the next Δτ≈2 min (≈one training step on ImageNet).\n3. Power–efficiency model.  Measure once the energy per micro-batch at three GPU power caps P∈{P_min, P_mid, P_max} using nvidia-smi –pl and fit a linear model  E(k,P)=k·(a+b·P) where k is the accumulation factor.  (Two extra scalars, estimated in <1 min warm-up.)\n4. Objective for the *next* update:\n   maximise R(η,k,P)= I(η) / ( E(k,P)·c_t ) over η∈[η_min,η_max], k∈{1,…,k_max}, P∈{P_min,P_mid,P_max}.\n   • As before, η* is analytic: η* = min(η_max , 2L_t /(α_t‖g_t‖²)).\n   • Optimal k* = clamp(⌈√(ρ_t η*‖g_t‖² /(2α_tL_t))⌉,1,k_max).\n   • Choose the power cap that minimises carbon per FLOP for the selected k*: P* = argmin_P  (E(k*,P)·c_t).\n5. Momentum from kinetic-energy rule m_t = clamp(1−κη*, m_min, m_max).\n6. Apply P* immediately via nvidia-smi –pl; implement k* with gradient accumulation; update parameters with (η*,m_t).\n7. Complexity: O(1) extra scalar ops; two new discrete choices (c_t fetched asynchronously, P selected from ≤3 options).  Safety fall-back: if the API is unreachable, revert to E-FLAC (energy-only)."
+        "method": "Carbon-Aware Forward-Looking Adaptive Controller (C-FLAC)\n1. Retain E-FLAC’s quadratic surrogate to predict loss improvement I(η)=α_t η‖g_t‖²/2.\n2. Carbon-intensity feed-forward.  Query an external signal c_t  (gCO₂ kWh⁻¹)—either live via the free ElectricityMap / WattTime API or replayed from a trace—for the next Δτ≈2 min (≈one training step on ImageNet).\n3. Power–efficiency model.  Measure once the energy per micro-batch at three GPU power caps P∈{P_min, P_mid, P_max} using nvidia-smi –pl and fit a linear model  E(k,P)=k·(a+b·P) where k is the accumulation factor.  (Two extra scalars, estimated in <1 min warm-up.)\n4. Objective for the *next* update:\n   maximise R(η,k,P)= I(η) / ( E(k,P)·c_t ) over η∈[η_min,η_max], k∈{1,…,k_max}, P∈{P_min,P_mid,P_max}.\n   • As before, η* is analytic: η* = min(η_max , 2L_t /(α_t‖g_t‖²)).\n   • Optimal k* = clamp(⌈√(ρ_t η*‖g_t‖² /(2α_tL_t))⌉,1,k_max).\n   • Choose the power cap that minimises carbon per FLOP for the selected k*: P* = argmin_P  (E(k*,P)·c_t).\n5. Momentum from kinetic-energy rule m_t = clamp(1−κη*, m_min, m_max).\n6. Apply P* immediately via nvidia-smi –pl; implement k* with gradient accumulation; update parameters with (η*,m_t).\n7. Complexity: O(1) extra scalar ops; two new discrete choices (c_t fetched asynchronously, P selected from ≤3 options).  Safety fall-back: if the API is unreachable, revert to E-FLAC (energy-only).",
+        "experimental_design": {
+          "experiment_summary": "Purpose: Demonstrate that Carbon-Aware Forward-Looking Adaptive Controller (C-FLAC) reduces the carbon footprint of training while preserving accuracy.\nScope: Single-node training of an ImageNet-1k classifier (ResNet-50, ≈25 M parameters) on an NVIDIA A100/H200 GPU with 80 GB VRAM.  We compare C-FLAC to the energy-only optimiser E-FLAC, measuring how much CO₂, energy and time are required to hit 74 % top-1 validation accuracy.\nWorkflow:\n1. Warm-up (≈1 min): run three micro-batches at power-caps P∈{200 W, 300 W, 400 W}; fit linear energy model E(k,P)=k·(a+bP).\n2. During training, every step executes C-FLAC:\n   a. Read live carbon-intensity c_t from ElectricityMap (Paris region trace supplied if offline).\n   b. From current loss surrogate determine η*, gradient-accumulation factor k* and power-cap P* that maximise expected loss decrease per gram CO₂.\n   c. Apply nvidia-smi -pl P*, accumulate k* micro-batches, update weights with η*, momentum m_t.\n3. Logging: per-step energy (nvml), power-cap, c_t, η, k, m, CO₂ estimate, loss, top-1.\n4. Stop when 74 % top-1 is reached; record totals.\n5. Repeat the whole run three times for statistical confidence.\nInfrastructure: PyTorch 2.3, CUDA 12, nvml-pynvml, requests; ≤70 extra LoC over the public E-FLAC implementation.  RAM (≥2 TB) easily holds the full ImageNet mem-mapped dataset and metrics buffer.\nExpected outcome: C-FLAC cuts CO₂ by ≈40 % vs. E-FLAC with ≤1 % extra wall-clock time and identical accuracy.",
+          "evaluation_metrics": [
+            "Total CO₂ emissions (kg CO₂-e) to reach 74 % top-1",
+            "Total energy consumption (kWh)",
+            "Wall-clock time (hours)",
+            "Top-1 accuracy (%)",
+            "Total CO₂ emissions (kg CO₂-e) to hit the target validation score; energy and time as secondary."
+          ],
+          "proposed_method": "Carbon-Aware Forward-Looking Adaptive Controller (C-FLAC)\nObjective: maximise predicted loss reduction per gram of CO₂ for the next SGD-Momentum update.\nTheoretical basis: extends E-FLAC’s quadratic loss-improvement surrogate by dividing through the product of (i) energy per update and (ii) live grid carbon intensity.\nComponents & algorithm:\n1. Surrogate loss improvement I(η)=α_t η‖g_t‖²⁄2 with online-estimated curvature α_t.\n2. Live carbon feed-forward: query ElectricityMap/WattTime every 30 s; cache c_t (gCO₂ kWh⁻¹).\n3. Device energy model: one-off calibration at three power caps; fit E(k,P)=k(a+bP).\n4. Solve argmax_{η,k,P} R(η,k,P)=I(η)/(E(k,P)c_t).\n   • η* = min(η_max, 2L_t/(α_t‖g_t‖²)).\n   • k* = clamp(⌈√(ρ_t η*‖g_t‖²/(2α_tL_t))⌉,1,k_max).\n   • P* = argmin_P E(k*,P)c_t among {P_min,P_mid,P_max}.\n5. Momentum: m_t = clamp(1−κη*, m_min, m_max).\n6. Apply P* (nvidia-smi -pl), accumulate k* micro-batches, update with (η*,m_t).\n7. Fallback: if carbon API fails, drop c_t term (revert to E-FLAC).  Overhead is O(1) operations and one subprocess call per step.",
+          "comparative_methods": [
+            "E-FLAC (energy-aware optimiser)"
+          ],
+          "models_to_use": [
+            "ResNet-50 (25M)"
+          ],
+          "datasets_to_use": [
+            "ImageNet-1k"
+          ],
+          "hyperparameters_to_search": {
+            "η_max": "0.4-1.2",
+            "η_min": "0.0001-0.01",
+            "k_max": "1,2,4,8",
+            "P_min/P_mid/P_max (W)": "200,300,400",
+            "κ (momentum shaping)": "0.5-2.0",
+            "ρ_t smoothing factor": "0.9-0.999"
+          }
+        },
+        "experiment_runs": [
+          {
+            "run_id": "proposed-iter1-ResNet-50-25M-ImageNet-1k",
+            "method_name": "proposed",
+            "model_name": "ResNet-50 (25M)",
+            "dataset_name": "ImageNet-1k"
+          },
+          {
+            "run_id": "comparative-1-iter1-ResNet-50-25M-ImageNet-1k",
+            "method_name": "comparative-1",
+            "model_name": "ResNet-50 (25M)",
+            "dataset_name": "ImageNet-1k"
+          }
+        ]
       }
     ]
   }
