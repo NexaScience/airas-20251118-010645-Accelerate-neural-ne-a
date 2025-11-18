@@ -1,0 +1,66 @@
+run_id: proposed-iter1-ResNet-50-25M-ImageNet-1k
+method: c-flac
+model:
+  name: resnet50
+  hf_repo: timm/resnet50.a1_in1k
+  params_m: 25
+  input_size: 224
+  num_classes: 1000
+dataset:
+  name: ImageNet-1k
+  hf_repo: benjamin-paine/imagenet-1k-256x256
+  image_size: 224
+  num_classes: 1000
+  batch:
+    micro: 256
+    accumulate: ${training.k}
+training:
+  epochs: 90
+  optimizer: sgd_momentum
+  weight_decay: 1e-4
+  initial_momentum: 0.9
+  seed: 42
+  # C-FLAC specific knobs
+  eta_max: 1.2
+  eta_min: 0.001
+  k_max: 8
+  k: 1            # runtime variable, updated by controller
+  kappa: 1.0      # momentum-shaping factor κ
+  rho_smoothing: 0.95
+  power_caps: [200, 300, 400]
+  power_cap_warmup_batches: 3
+  carbon_api:
+    provider: electricitymap
+    polling_seconds: 30
+    fallback: e-flac      # if API unreachable
+logging:
+  every_n_steps: 50
+metrics:
+  primary: kg_co2_to_target
+hardware:
+  gpu:
+    type: a100
+    power_management: nvidia_smi
+optuna:
+  n_trials: 40
+  direction: minimize
+  search_space:
+    eta_max:
+      type: uniform
+      low: 0.4
+      high: 1.2
+    eta_min:
+      type: loguniform
+      low: 0.0001
+      high: 0.01
+    k_max:
+      type: categorical
+      choices: [1, 2, 4, 8]
+    kappa:
+      type: uniform
+      low: 0.5
+      high: 2.0
+    rho_smoothing:
+      type: uniform
+      low: 0.9
+      high: 0.999

@@ -1,0 +1,57 @@
+run_id: comparative-1-iter1-ResNet-50-25M-ImageNet-1k
+method: e-flac
+model:
+  name: resnet50
+  hf_repo: timm/resnet50.a1_in1k
+  params_m: 25
+  input_size: 224
+  num_classes: 1000
+dataset:
+  name: ImageNet-1k
+  hf_repo: benjamin-paine/imagenet-1k-256x256
+  image_size: 224
+  num_classes: 1000
+  batch:
+    micro: 256
+    accumulate: 1
+training:
+  epochs: 90
+  optimizer: sgd_momentum
+  weight_decay: 1e-4
+  initial_momentum: 0.9
+  seed: 42
+  # E-FLAC adaptive knobs (no power-cap control)
+  eta_max: 1.2
+  eta_min: 0.001
+  k_max: 8
+  kappa: 1.0
+  rho_smoothing: 0.95
+  power_cap_fixed: 400   # watts, kept constant
+  lr_schedule: adaptive_e_flac
+logging:
+  every_n_steps: 50
+metrics:
+  primary: kg_co2_to_target
+hardware:
+  gpu:
+    type: a100
+    power_management: fixed_cap
+optuna:
+  n_trials: 30
+  direction: minimize
+  search_space:
+    eta_max:
+      type: uniform
+      low: 0.4
+      high: 1.2
+    eta_min:
+      type: loguniform
+      low: 0.0001
+      high: 0.01
+    k_max:
+      type: categorical
+      choices: [1, 2, 4, 8]
+    kappa:
+      type: uniform
+      low: 0.5
+      high: 2.0

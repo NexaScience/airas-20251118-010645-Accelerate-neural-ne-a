@@ -1,0 +1,72 @@
+defaults:
+  - _self_
+
+# ---------------------------------------------------------------------
+# CLI-overridable fields
+# ---------------------------------------------------------------------
+run: null
+results_dir: outputs
+mode: full  # full | trial
+
+# ---------------------------------------------------------------------
+# WandB (auto-adjusted by main/train)
+# ---------------------------------------------------------------------
+wandb:
+  entity: gengaru617-personal
+  project: 2025-11-17
+  mode: online
+
+# ---------------------------------------------------------------------
+# Logging & evaluation defaults
+# ---------------------------------------------------------------------
+logging:
+  every_n_steps: 1
+
+evaluation:
+  val_max_batches: 200  # trimmed in trial mode
+
+# ---------------------------------------------------------------------
+# Training baseline defaults (overridden in run-specific YAML)
+# ---------------------------------------------------------------------
+training:
+  epochs: 90
+  eta_min: 0.001
+  eta_max: 1.2
+  k_max: 8
+  k: 1
+  initial_momentum: 0.9
+  weight_decay: 1e-4
+  kappa: 1.0
+  rho_smoothing: 0.95
+  power_caps: [200, 300, 400]
+  power_cap_warmup_batches: 3
+  carbon_api:
+    provider: electricitymap
+    polling_seconds: 30
+    fallback: e-flac
+
+# ---------------------------------------------------------------------
+# Dataset / model placeholders (populated by run-YAML)
+# ---------------------------------------------------------------------
+dataset:
+  name: null
+  hf_repo: null
+  image_size: 224
+  num_classes: 1000
+  batch:
+    micro: 32
+    accumulate: 1
+
+model:
+  name: resnet18
+  num_classes: 1000
+  input_size: 224
+  pretrained: true
+
+# ---------------------------------------------------------------------
+# Optuna defaults (disabled unless overridden)
+# ---------------------------------------------------------------------
+optuna:
+  n_trials: 0
+  direction: minimize
+  search_space: {}
