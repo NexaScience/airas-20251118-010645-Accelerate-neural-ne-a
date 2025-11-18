@@ -6,5 +6,82 @@
     "distributed data parallel",
     "learning rate scheduling",
     "neural network pruning"
+  ],
+  "research_study_list": [
+    {
+      "title": "Collage: Light-Weight Low-Precision Strategy for LLM Training"
+    },
+    {
+      "title": "Guaranteed Approximation Bounds for Mixed-Precision Neural Operators"
+    },
+    {
+      "title": "Shifted and Squeezed 8-bit Floating Point format for Low-Precision Training of Deep Neural Networks"
+    },
+    {
+      "title": "Structured Inverse-Free Natural Gradient Descent: Memory-Efficient & Numerically-Stable KFAC"
+    },
+    {
+      "title": "Multi-Precision Policy Enforced Training (MuPPET) : A Precision-Switching Strategy for Quantised Fixed-Point Training of CNNs"
+    },
+    {
+      "title": "Towards Cheaper Inference in Deep Networks with Lower Bit-Width Accumulators"
+    },
+    {
+      "title": "Accumulated Decoupled Learning with Gradient Staleness Mitigation for Convolutional Neural Networks"
+    },
+    {
+      "title": "Neural gradients are near-lognormal: improved quantized  and sparse training"
+    },
+    {
+      "title": "Stabilizing Backpropagation Through Time to Learn Complex Physics"
+    },
+    {
+      "title": "Extrapolation for Large-batch Training in Deep Learning"
+    },
+    {
+      "title": "DRAGONN: Distributed Randomized Approximate Gradients of Neural Networks"
+    },
+    {
+      "title": "DRAGONN: Distributed Randomized Approximate Gradients of Neural Networks"
+    },
+    {
+      "title": "DD-PPO: Learning Near-Perfect PointGoal Navigators from 2.5 Billion Frames"
+    },
+    {
+      "title": "Towards a Better Theoretical Understanding of Independent Subnetwork Training"
+    },
+    {
+      "title": "Debiasing Distributed Second Order Optimization with Surrogate Sketching and Scaled Regularization"
+    },
+    {
+      "title": "AutoLRS: Automatic Learning-Rate Schedule by Bayesian Optimization on the Fly"
+    },
+    {
+      "title": "Budgeted Training: Rethinking Deep Neural Network Training Under Resource Constraints"
+    },
+    {
+      "title": "Learning Rate Schedules in the Presence of Distribution Shift"
+    },
+    {
+      "title": "Scaling Laws and Compute-Optimal Training Beyond Fixed Training Durations"
+    },
+    {
+      "title": "Stepping on the Edge: Curvature Aware Learning Rate Tuners"
+    },
+    {
+      "title": "Fantastic Weights and How to Find Them: Where to Prune in Dynamic Sparse Training"
+    },
+    {
+      "title": "Neuron-level Structured Pruning using Polarization Regularizer"
+    },
+    {
+      "title": "The Combinatorial Brain Surgeon: Pruning Weights That Cancel One Another in Neural Networks"
+    },
+    {
+      "title": "The Combinatorial Brain Surgeon: Pruning Weights That Cancel One Another in Neural Networks"
+    },
+    {
+      "title": "Dynamic Sparse Training: Find Efficient Sparse Network From Scratch With Trainable Masked Layers"
+    }
   ]
 }
